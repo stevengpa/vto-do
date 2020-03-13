@@ -1,0 +1,39 @@
+server {
+
+  listen 80;
+
+  set $locale "en";
+
+  error_page 404 /custom404;
+
+  if ($http_cookie ~ "locale=([\w-]+)") {
+    set $locale $1;
+  }
+
+  location / {
+    root /usr/share/nginx/html;
+    index index.html;
+    try_files $uri $uri/ /index.html =404;
+  }
+
+  # /assets/fonts/<SUB-FOLDER>/file<.eot|.svg|.ttf|.woff|.woff2>
+  location ~ ^\/assets\/fonts(\/[a-zA-Z0-9_.\-]+)+([a-zA-Z0-9_.\-])+(\.eot|\.svg|\.ttf|\.woff2?)+$ {
+    root /usr/share/nginx/html;
+  }
+  # /assets/icons/file<.svg>
+  location ~ ^\/assets\/icons\/([a-zA-Z0-9_.\-])+(\.svg)+$ {
+    root /usr/share/nginx/html;
+  }
+  # /img/file<.jpg|.png|.svg>
+  location ~ ^\/img\/([a-zA-Z0-9_.\-])+(\.jpg|\.png|\.svg)+$ {
+    root /usr/share/nginx/html;
+  }
+  # /assets/<fonts|icons|images>
+  location ~ ^\/assets\/((fonts)|(icons)|(images))\/?$ {
+    return 404;
+  }
+  #/assets
+  location /assets {
+    return 404;
+  }
+}

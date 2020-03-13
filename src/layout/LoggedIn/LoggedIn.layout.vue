@@ -14,7 +14,6 @@ import { mapActions, mapGetters } from 'vuex'
 
 import LoggedInHeader from '@/components/LoggedIn/header/header.component.vue'
 import { langActions } from '@/store/lang/lang.actionTypes'
-import { loadLanguageAsync } from '@/i18n/i18n'
 
 export default {
   name: 'LoggedInLayout',
