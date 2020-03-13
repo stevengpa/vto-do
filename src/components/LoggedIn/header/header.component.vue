@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <router-link class="navbar-brand" to="/">TODO LIST</router-link>
+    <router-link class="navbar-brand" to="/todo">TODO LIST</router-link>
     <button
       class="navbar-toggler"
       type="button"
@@ -18,8 +18,8 @@
           class="nav-item nav-link"
           tag="li"
           active-class="active"
-          to="/"
-          match
+          exact-active-class="active"
+          to="/todo"
           >To Do</router-link
         >
         <router-link
@@ -27,7 +27,6 @@
           tag="li"
           active-class="active"
           to="/report"
-          match
           >{{ report }}</router-link
         >
         <li class="nav-item dropdown">
@@ -46,9 +45,9 @@
               v-for="(lang, i) in langs"
               :key="`Lang${i}`"
               class="dropdown-item"
-              v-on:click.native="changeLanguageHandler"
               to=""
-              :query="{ lang }"
+              :event="''"
+              @click.native.prevent="changeLanguageHandler"
               >{{ lang }}</router-link
             >
           </div>
@@ -98,7 +97,7 @@ export default {
     cursor: pointer;
   }
 
-  .nav-link.router-link-exact-active.active {
+  .nav-link.active {
     color: #d35400;
   }
 }

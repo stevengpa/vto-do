@@ -30,9 +30,9 @@ export default {
     }),
     changeLang(lang) {
       if (lang !== this.lang) {
-        this.changeLanguage(lang).then(() =>
-          this.$router.replace({ query: { lang } })
-        )
+        this.changeLanguage(lang).then(() => {
+          return this.$router.push({ query: { ...this.$route.query, lang } })
+        })
       }
     },
   },
